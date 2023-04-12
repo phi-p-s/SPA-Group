@@ -3,12 +3,57 @@ import { v4 as uuidv4 } from 'uuid';
 import * as fs from 'node:fs/promises';
 import cors from 'cors';
 import ItemsRouter from "./items.js";
+import { MongoClient } from 'mongodb';
 
 const port = 3001;
 const app = express();
 
-
+let uri = 'mongodb://localhost:27017';
+let client = new MongoClient(uri);
+await client.connect();
+let db = client.db('local');
+let storeCollection = db.collection('stores');
+let itemCollection = db.collection('items');
 const StoresRouter = Router();
+
+async function findStoreById(){
+  //Need to update with params
+  const queryParams = {_id : 1
+  };
+  let retVal = await storeCollection.find(queryParams).toArray();
+  console.log(retVal);
+}
+
+async function findItemById(){
+  //Need to update with params
+  const queryParams = {_id : 2};
+  const retVal = await itemCollection.findOne(queryParams);
+  console.log(retVal);
+}
+
+async function createStoreDoc(){
+  
+  //Need to update with params
+  const store = {
+    _id: 2,
+    name: 'Second Store Store'
+  };
+  await storeCollection.insertOne(store);
+}
+
+async function createItemDoc(){
+  
+  //Need to update with params
+  const item = {
+    _id: 2,
+    name: 'Item',
+    quantity: 1,
+    price: 1.99,
+    store_id: 1 
+  };
+  await itemCollection.insertOne(item);
+}
+
 //ItemsRouter.mergeParams = true;
 //StoresRouter.use("/:store_id/items", ItemsRouter);
 
