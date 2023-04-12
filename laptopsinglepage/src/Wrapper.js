@@ -4,9 +4,9 @@ export default function Wrapper() {
   return (
     <>
       <header>
-        <Link to="/todo">View all todos</Link>
+        <Link to="/stores">View all stores</Link>
         <br></br>
-        <Link to="/todo/new">Create a new Todo</Link>
+        <Link to="/stores/new">Create a new store</Link>
       </header>
 
       <Outlet />

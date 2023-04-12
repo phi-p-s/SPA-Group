@@ -19,7 +19,7 @@ export default function Todos() {
 }
 
 async function fetchTodos() {
-  const response = await fetch(`http://localhost:3001/todo`);
+  const response = await fetch(`http://localhost:3001/stores`);
   return await response.json();
 }
 

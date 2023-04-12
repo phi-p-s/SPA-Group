@@ -15,19 +15,19 @@ const router = createBrowserRouter([
     element: <Wrapper />,
     children: [
       {
-        path: "/todo",
+        path: "/stores",
         loader: fetchTodos,
         element: <Todos />,
       },
       {
-        path: "/todo/:todoId",
+        path: "/stores/:store_id",
         loader: getTodo,
         element: (
             <SingleTodo />
         ),
       },
       {
-        path: "/todo/new",
+        path: "/stores/new",
         element: (
             <NewTodo />
         ),
