@@ -2,6 +2,14 @@ import express, { json, Router } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import * as fs from 'node:fs/promises';
 import cors from 'cors';
+import { MongoClient } from 'mongodb';
+
+let uri = 'mongodb://localhost:27017';
+let client = new MongoClient(uri);
+await client.connect();
+let db = client.db('local');
+let storeCollection = db.collection('stores');
+let itemCollection = db.collection('items');
 
 const ItemsRouter = Router();
 
@@ -46,10 +54,10 @@ ItemsRouter.get("/stores/:store_id/items", async (req, res) => {
 
 //Get specific item
 ItemsRouter.get("/stores/:store_id/items/:item_id", async (req, res) => {
-    const item_id = req.params.item_id;
+    //const item_id = req.params.item_id;
     try {
-      const post = await fs.readFile(`storage/${item_id}.json`);
-      res.json(JSON.parse(post));
+      //const post = await fs.readFile(`storage/${item_id}.json`);
+      res.json(findItemById(item_id));
     } catch (e) {
       console.log(e);
       res.status(500);

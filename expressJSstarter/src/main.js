@@ -31,14 +31,6 @@ async function findAllStores(){
 }
 
 
-
-async function findItemById(id){
-  //Need to update with params
-  const queryParams = {_id : Number(id)};
-  const retVal = await itemCollection.findOne(queryParams);
-  console.log(retVal);
-}
-
 async function createStoreDoc(id , nameIn){
   
   //Need to update with params
@@ -49,18 +41,7 @@ async function createStoreDoc(id , nameIn){
   await storeCollection.insertOne(store);
 }
 
-async function createItemDoc(id , nameIn , quantityIn, priceIn, store_id_in){
-  
-  //Need to update with params
-  const item = {
-    _id: id,
-    name: nameIn,
-    quantity: quantityIn,
-    price: priceIn,
-    store_id: store_id_in 
-  };
-  await itemCollection.insertOne(item);
-}
+
 
 //ItemsRouter.mergeParams = true;
 //StoresRouter.use("/:store_id/items", ItemsRouter);
@@ -87,10 +68,10 @@ StoresRouter.get("/stores", async (req, res) => {
 });
 
 StoresRouter.get("/stores/:store_id", async (req, res) => {
-  const store_id = req.params.store_id;
+  //const store_id = req.params.store_id;
   try {
-    const post = await fs.readFile(`storage/${store_id}.json`);
-    res.json(JSON.parse(post));
+    //const post = await fs.readFile(`storage/${store_id}.json`);
+    res.json(findStoreById(store_id));
   } catch (e) {
     console.log(e);
     res.status(500);
