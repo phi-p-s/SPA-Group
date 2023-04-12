@@ -14,42 +14,50 @@ await client.connect();
 let db = client.db('local');
 let storeCollection = db.collection('stores');
 let itemCollection = db.collection('items');
+
 const StoresRouter = Router();
 
-async function findStoreById(){
+async function findStoreById(id){
   //Need to update with params
-  const queryParams = {_id : 1
+  const queryParams = {_id : Number(id)
   };
   let retVal = await storeCollection.find(queryParams).toArray();
   console.log(retVal);
 }
 
-async function findItemById(){
+async function findAllStores(){
+  const queryParams = {};
+  let retVal = await storeCollection.find(queryParams).toArray();
+}
+
+
+
+async function findItemById(id){
   //Need to update with params
-  const queryParams = {_id : 2};
+  const queryParams = {_id : Number(id)};
   const retVal = await itemCollection.findOne(queryParams);
   console.log(retVal);
 }
 
-async function createStoreDoc(){
+async function createStoreDoc(id , nameIn){
   
   //Need to update with params
   const store = {
-    _id: 2,
-    name: 'Second Store Store'
+    _id: id,
+    name: nameIn
   };
   await storeCollection.insertOne(store);
 }
 
-async function createItemDoc(){
+async function createItemDoc(id , nameIn , quantityIn, priceIn, store_id_in){
   
   //Need to update with params
   const item = {
-    _id: 2,
-    name: 'Item',
-    quantity: 1,
-    price: 1.99,
-    store_id: 1 
+    _id: id,
+    name: nameIn,
+    quantity: quantityIn,
+    price: priceIn,
+    store_id: store_id_in 
   };
   await itemCollection.insertOne(item);
 }
@@ -64,18 +72,18 @@ app.use(StoresRouter);
 
 
 StoresRouter.get("/stores", async (req, res) => {
-  const directoryContents = await fs.readdir('storage/');
-  const allStores = {
-    stores: [],
-    count: directoryContents.length
-  };
+  //const directoryContents = await fs.readdir('storage/');
+  //const allStores = {
+  //  stores: [],
+  //  count: directoryContents.length
+  //};
 
-  for (const entry of directoryContents) {
-    const contents = await fs.readFile(`storage/${entry}`);
-    allStores.stores.push(JSON.parse(contents));
-  }
+  //for (const entry of directoryContents) {
+  //  const contents = await fs.readFile(`storage/${entry}`);
+  //  allStores.stores.push(JSON.parse(contents));
+  //}
 
-  res.send(allStores);
+  res.send(findAllStores);
 });
 
 StoresRouter.get("/stores/:store_id", async (req, res) => {

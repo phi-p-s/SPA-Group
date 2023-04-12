@@ -7,6 +7,27 @@ const ItemsRouter = Router();
 
 export default ItemsRouter;
 
+
+async function findItemById(id){
+  //Need to update with params
+  const queryParams = {_id : Number(id)};
+  const retVal = await itemCollection.findOne(queryParams);
+  console.log(retVal);
+}
+
+async function createItemDoc(id , nameIn , quantityIn, priceIn, store_id_in){
+  
+  //Need to update with params
+  const item = {
+    _id: id,
+    name: nameIn,
+    quantity: quantityIn,
+    price: priceIn,
+    store_id: store_id_in 
+  };
+  await itemCollection.insertOne(item);
+}
+
 //Get specific item
 ItemsRouter.get("/stores/:store_id/items", async (req, res) => {
     const directoryContents = await fs.readdir(`storage/${store_id}`);
