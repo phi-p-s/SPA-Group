@@ -14,7 +14,7 @@ await client.connect();
 let db = client.db('local');
 let storeCollection = db.collection('stores');
 let itemCollection = db.collection('items');
-
+let nextId = 0;
 const StoresRouter = Router();
 
 async function findStoreById(id){
@@ -31,14 +31,14 @@ async function findAllStores(){
 }
 
 
-async function createStoreDoc(id , nameIn){
+async function createStoreDoc(jsonIn){
   
   //Need to update with params
-  const store = {
-    _id: id,
-    name: nameIn
-  };
-  await storeCollection.insertOne(store);
+  //const store = {
+  //  _id: Number(id),
+  //  name: nameIn
+  //};
+  await storeCollection.insertOne(jsonIn);
 }
 
 
@@ -68,7 +68,7 @@ StoresRouter.get("/stores", async (req, res) => {
 });
 
 StoresRouter.get("/stores/:store_id", async (req, res) => {
-  //const store_id = req.params.store_id;
+  const store_id = req.params.store_id;
   try {
     //const post = await fs.readFile(`storage/${store_id}.json`);
     res.json(findStoreById(store_id));
@@ -83,8 +83,10 @@ StoresRouter.get("/stores/:store_id", async (req, res) => {
 // creates a new json
 StoresRouter.post("/stores", async (req, res) => {
   const requestBody = req.body;
-  requestBody.id = uuidv4();
-  await fs.writeFile(`storage/${requestBody.id}.json`, JSON.stringify(requestBody));
+  requestBody.id = nextId;
+  nextId += 1;
+  createStoreDoc(requestBody);
+  //await fs.writeFile(`storage/${requestBody.id}.json`, JSON.stringify(requestBody));
   res.status(201);
   res.send('');
 });
