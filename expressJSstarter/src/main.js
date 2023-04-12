@@ -20,7 +20,6 @@ app.use(StoresRouter);
 
 StoresRouter.get("/stores", async (req, res) => {
   const directoryContents = await fs.readdir('storage/');
-  console.log("hi")
   const allStores = {
     stores: [],
     count: directoryContents.length

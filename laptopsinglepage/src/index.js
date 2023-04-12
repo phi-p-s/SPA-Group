@@ -4,9 +4,9 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Wrapper from './Wrapper';
-import Todos, { fetchTodos } from './Todos';
-import SingleTodo, { getTodo } from './SingleTodo';
-import NewTodo, { postTodo } from './NewTodo';
+import Stores, { fetchStores } from './Stores';
+import SingleStore, { getStore } from './SingleStore';
+import NewStore, { postStore } from './NewStore';
 
 
 const router = createBrowserRouter([
@@ -16,20 +16,20 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/stores",
-        loader: fetchTodos,
-        element: <Todos />,
+        loader: fetchStores,
+        element: <Stores />,
       },
       {
         path: "/stores/:store_id",
-        loader: getTodo,
+        loader: getStore,
         element: (
-            <SingleTodo />
+            <SingleStore />
         ),
       },
       {
         path: "/stores/new",
         element: (
-            <NewTodo />
+            <NewStore />
         ),
       },
     ],
