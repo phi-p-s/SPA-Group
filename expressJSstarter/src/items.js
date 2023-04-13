@@ -16,35 +16,35 @@ let nextId = 0;
 export default ItemsRouter;
 
 
-async function findItemById(id){
-  //Need to update with params
-  const queryParams = {_id : Number(id)};
-  const retVal = await itemCollection.findOne(queryParams);
-  console.log(retVal);
+async function findItemById(id) {
+    //Need to update with params
+    const queryParams = { _id: Number(id) };
+    const retVal = await itemCollection.findOne(queryParams);
+    console.log(retVal);
 }
 
-async function findItemByStore(id){
-  //Need to update with params
-  const queryParams = {store_id : Number(id)};
-  const retVal = await itemCollection.find(queryParams).toArray();
-  console.log(retVal);
+async function findItemByStore(id) {
+    //Need to update with params
+    const queryParams = { store_id: Number(id) };
+    const retVal = await itemCollection.find(queryParams).toArray();
+    console.log(retVal);
 }
 
-async function createItemDoc(jsonIn){
-  
-  //Need to update with params
-  //const item = {
-  //  _id: Number(id),
-  //  name: nameIn,
-  //  quantity: quantityIn,
-  //  price: priceIn,
-  //  store_id: store_id_in 
-  //};
-  await itemCollection.insertOne(jsonIn);
+async function createItemDoc(jsonIn) {
+
+    //Need to update with params
+    //const item = {
+    //  _id: Number(id),
+    //  name: nameIn,
+    //  quantity: quantityIn,
+    //  price: priceIn,
+    //  store_id: store_id_in 
+    //};
+    await itemCollection.insertOne(jsonIn);
 }
 
 //Get specific item
-ItemsRouter.get("/stores/:store_id/items", async (req, res) => {
+ItemsRouter.get("/", async(req, res) => {
     //const directoryContents = await fs.readdir(`storage/${store_id}`);
     //const allItems = {
     //  items: [],
@@ -60,20 +60,21 @@ ItemsRouter.get("/stores/:store_id/items", async (req, res) => {
 })
 
 //Get specific item
-ItemsRouter.get("/stores/:store_id/items/:item_id", async (req, res) => {
+ItemsRouter.get("/:item_id", async(req, res) => {
     const item_id = req.params.item_id;
     try {
-      //const post = await fs.readFile(`storage/${item_id}.json`);
-      res.json(findItemById(item_id));
+        //const post = await fs.readFile(`storage/${item_id}.json`);
+        res.json(findItemById(item_id));
     } catch (e) {
-      console.log(e);
-      res.status(500);
-      res.send('');
+        console.log(e);
+        res.status(500);
+        res.send('');
     }
 })
 
 //Create item
-ItemsRouter.post("/stores/:store_id/items", async (req, res) => {
+ItemsRouter.post("/", async(req, res) => {
+    console.log("Ayo")
     const requestBody = req.body;
     console.log(requestBody);
     requestBody.id = nextId;

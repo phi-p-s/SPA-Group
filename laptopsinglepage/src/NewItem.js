@@ -31,7 +31,7 @@ export default function NewItem() {
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify(newStoreObject)
         });
-    
+        console.log("poo");
     }
 
   return (
