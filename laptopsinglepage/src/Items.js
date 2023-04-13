@@ -4,6 +4,7 @@ import {Link, useLoaderData} from 'react-router-dom';
 export default function Items() {
   var items = [];
   items = useLoaderData();
+  console.log(items);
   return (
     <>
       {items.map((item) => (

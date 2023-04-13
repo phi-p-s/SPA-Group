@@ -57,8 +57,11 @@ ItemsRouter.get("/", async(req, res) => {
     //  const contents = await fs.readFile(`storage/${entry}`);
     //  allItems.items.push(JSON.parse(contents));
     //}
-    const store_id = req.params.store_id;
-    res.send(findItemByStore(store_id));
+    const queryParams = { store_id: req.params.store_id };
+    console.log(queryParams)
+    let retVal = await storeCollection.find(queryParams).toArray();
+    console.log(retVal)
+    res.send(retVal);
 })
 
 //Get specific item
