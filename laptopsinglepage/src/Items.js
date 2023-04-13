@@ -4,14 +4,13 @@ import {Link, useLoaderData} from 'react-router-dom';
 export default function Items() {
   var items = [];
   items = useLoaderData();
-  console.log(items);
+ 
   return (
     <>
       {items.map((item) => (
         <div key={item.id}>
-          <a href={'/stores/' + item.store_id +'/items/new'}>Create new item</a>    
           <Link to={`${item.id}`}><h1>{item.name}</h1></Link>
-          <p>Store id: {item.id}</p>
+          <p>Item id: {item.id}</p>
         </div>
       ))}
     </>

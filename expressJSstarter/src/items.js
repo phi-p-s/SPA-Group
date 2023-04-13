@@ -66,10 +66,18 @@ ItemsRouter.get("/", async(req, res) => {
 
 //Get specific item
 ItemsRouter.get("/:item_id", async(req, res) => {
+    const store_id = req.params.store_id;
     const item_id = req.params.item_id;
+    console.log("HI");
     try {
-        //const post = await fs.readFile(`storage/${item_id}.json`);
-        res.json(findItemById(item_id));
+        //const post = await fs.readFile(`storage/${store_id}.json`);
+        const queryParams = {
+            store_id: store_id,
+            id: item_id
+        };
+        let retVal = await itemCollection.find(queryParams).toArray();
+        console.log(retVal)
+        res.json(retVal);
     } catch (e) {
         console.log(e);
         res.status(500);

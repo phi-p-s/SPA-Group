@@ -9,6 +9,7 @@ import SingleStore,{ getStore } from './SingleStore';
 import Items, { getItems } from './Items';
 import NewStore, { postStore } from './NewStore';
 import NewItem, { postItem } from './NewItem';
+import SingleItem, {getItem} from './SingleItem';
 
 
 
@@ -42,14 +43,19 @@ const router = createBrowserRouter([
             <Items />
         ),
       },
-      
-        {
+      {
+        path: "/stores/:store_id/items/:item_id",
+        loader: getItem,
+        element: (
+          <SingleItem />
+        )
+      },
+      {
           path: "/stores/:store_id/items/new",
           loader: getStore,
           element: (
               <NewItem />
           ),
-        
       },
     ],
   },
