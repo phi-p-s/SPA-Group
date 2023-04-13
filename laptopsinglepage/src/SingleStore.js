@@ -1,4 +1,6 @@
 import { useLoaderData } from "react-router-dom";
+import { Link, Outlet } from 'react-router-dom';
+
 
 export async function getStore({ params }) {
   const response = await fetch(`http://localhost:3001/stores/${params.store_id}`);
@@ -9,9 +11,12 @@ export async function getStore({ params }) {
 
 export default function Singlestore() {
   const store = useLoaderData();
+  console.log(store.store_id)
+
   return (
     <div key={store.id} id="singlestore">
           <h1>Store name: {store.name}</h1>
+          <a href={'/stores/' + store.id +'/new'}>Create new item</a>
           <p>store id: {store.id}</p>
     </div>
   );

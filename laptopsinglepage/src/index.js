@@ -7,6 +7,8 @@ import Wrapper from './Wrapper';
 import Stores, { fetchStores } from './Stores';
 import SingleStore, { getStore } from './SingleStore';
 import NewStore, { postStore } from './NewStore';
+import NewItem, { postItem } from './NewItem';
+
 
 
 const router = createBrowserRouter([
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
         element: (
             <NewStore />
         ),
+      },
+        {
+          path: "/stores/:store_id/new",
+          loader: getStore,
+          element: (
+              <NewItem />
+          ),
+        
       },
     ],
   },
