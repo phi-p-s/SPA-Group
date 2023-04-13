@@ -8,7 +8,7 @@ import { MongoClient } from 'mongodb';
 const port = 3001;
 const app = express();
 
-let uri = 'mongodb://localhost:27017';
+let uri = 'mongodb://127.0.0.1:27017';
 let client = new MongoClient(uri);
 await client.connect();
 let db = client.db('local');
@@ -23,11 +23,15 @@ async function findStoreById(id){
   };
   let retVal = await storeCollection.find(queryParams).toArray();
   console.log(retVal);
+  return retVal;
 }
 
 async function findAllStores(){
+  console.log("ayo whatup");
   const queryParams = {};
   let retVal = await storeCollection.find(queryParams).toArray();
+  console.log(retVal);
+  return retVal;
 }
 
 
@@ -63,20 +67,27 @@ StoresRouter.get("/stores", async (req, res) => {
   //  const contents = await fs.readFile(`storage/${entry}`);
   //  allStores.stores.push(JSON.parse(contents));
   //}
-
-  res.send(findAllStores);
+  const queryParams = {};
+  let retVal = await storeCollection.find(queryParams).toArray();
+  res.send(retVal);
 });
 
 StoresRouter.get("/stores/:store_id", async (req, res) => {
   const store_id = req.params.store_id;
+  console.log(store_id);
   try {
     //const post = await fs.readFile(`storage/${store_id}.json`);
-    res.json(findStoreById(store_id));
+    const queryParams = {id : Number(store_id)
+    };
+    let retVal = await storeCollection.find(queryParams).toArray();
+    console.log(retVal)
+    res.json(retVal);
   } catch (e) {
     console.log(e);
     res.status(500);
     res.send('');
   }
+  
 });
 
 

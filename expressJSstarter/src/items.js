@@ -4,7 +4,7 @@ import * as fs from 'node:fs/promises';
 import cors from 'cors';
 import { MongoClient } from 'mongodb';
 
-let uri = 'mongodb://localhost:27017';
+let uri = 'mongodb://127.0.0.1:27017';
 let client = new MongoClient(uri);
 await client.connect();
 let db = client.db('local');
