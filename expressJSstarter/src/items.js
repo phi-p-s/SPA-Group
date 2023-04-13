@@ -75,8 +75,10 @@ ItemsRouter.get("/stores/:store_id/items/:item_id", async (req, res) => {
 //Create item
 ItemsRouter.post("/stores/:store_id/items", async (req, res) => {
     const requestBody = req.body;
+    console.log(requestBody);
     requestBody.id = nextId;
     nextId += 1;
+
     createItemDoc(requestBody);
     //await fs.writeFile(`storage/${requestBody.id}.json`, JSON.stringify(requestBody));
     res.status(201);

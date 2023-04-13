@@ -14,7 +14,8 @@ export default function NewStore() {
             name: inputName,
         };
     
-    
+        console.log(newStoreObject);
+
         await fetch(`http://localhost:3001/stores`, {
             method: 'POST',
             headers: {'Content-type': 'application/json'},

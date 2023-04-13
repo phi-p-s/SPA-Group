@@ -9,9 +9,14 @@ export async function getStore({ params }) {
   return retVal[0];
 }
 
+
+
+
+
 export default function Singlestore() {
   const store = useLoaderData();
   console.log(store.store_id)
+
 
   return (
     <div key={store.id} id="singlestore">
@@ -21,3 +26,4 @@ export default function Singlestore() {
     </div>
   );
 }
+

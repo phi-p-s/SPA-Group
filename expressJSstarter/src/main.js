@@ -22,15 +22,12 @@ async function findStoreById(id){
   const queryParams = {_id : Number(id)
   };
   let retVal = await storeCollection.find(queryParams).toArray();
-  console.log(retVal);
   return retVal;
 }
 
 async function findAllStores(){
-  console.log("ayo whatup");
   const queryParams = {};
   let retVal = await storeCollection.find(queryParams).toArray();
-  console.log(retVal);
   return retVal;
 }
 

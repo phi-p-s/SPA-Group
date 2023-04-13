@@ -6,12 +6,7 @@ import './store.css';
 
 
 export default function NewItem() {
-    const [state, setState] = useState({
-        name:"",
-        quantity: "",
-        price: ""
 
-    });
     const [inputName, setName] = useState('');
     const [inputQuantity, setQuantity] = useState('');
     const [inputPrice, setPrice] = useState('');
@@ -24,12 +19,12 @@ export default function NewItem() {
         event.preventDefault();
     
         const newStoreObject = {
-            name: state.name,
-            quantity: state.quantity,
-            price: state.price,
+            name: inputName,
+            quantity: inputQuantity,
+            price: inputPrice,
             store_id: store.id
         };
-    
+        console.log(newStoreObject);
     
         await fetch(`http://localhost:3001/stores/${store.id}/items`, {
             method: 'POST',
@@ -45,15 +40,15 @@ export default function NewItem() {
         <form onSubmit={(event) => createNewItemSubmission(event)}>
             <br></br>
             <p>Item Name</p>
-                <input type="text" value={state.name} onChange = {(event) => setState(event.target.value)}/> 
+                <input type="text" value={inputName} onChange = {(event) => setName(event.target.value)}/> 
                 <button type= "submit">Update Item</button>
                 <br></br>
                 <p>Quantity</p>
-                <input type="text" value={state.quantity} onChange = {(event) => setState(event.target.value)}/> 
+                <input type="text" value={inputQuantity} onChange = {(event) =>  setQuantity(event.target.value)}/> 
                 {/* <button type= "submit">Update Quantity</button> */}
                 <br></br>
                 <p>Price</p>
-                <input type="text" value={state.price} onChange = {(event) => setState(event.target.value)}/> 
+                <input type="text" value={inputPrice} onChange = {(event) =>  setPrice(event.target.value)}/> 
                 {/* <button type= "submit">Update Price</button> */}
         </form>
     </div>
