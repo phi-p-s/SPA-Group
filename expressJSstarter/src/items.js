@@ -59,7 +59,7 @@ ItemsRouter.get("/", async(req, res) => {
     //}
     const queryParams = { store_id: req.params.store_id };
     console.log(queryParams)
-    let retVal = await storeCollection.find(queryParams).toArray();
+    let retVal = await itemCollection.find(queryParams).toArray();
     console.log(retVal)
     res.send(retVal);
 })
