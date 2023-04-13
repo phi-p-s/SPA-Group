@@ -9,7 +9,6 @@ export default function Stores() {
       {stores.map((store) => (
         <div key={store.id}>
           <Link to={`${store.id}/items`}><h1>{store.name}</h1></Link>
-          <p>Store id: {store.id}</p>
         </div>
       ))}
     </>
