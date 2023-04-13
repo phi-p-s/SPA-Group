@@ -23,7 +23,7 @@ StoresRouter.use("/stores/:store_id/items", ItemsRouter)
 async function findStoreById(id) {
     //Need to update with params
     const queryParams = {
-        _id: Number(id)
+        _id: id
     };
     let retVal = await storeCollection.find(queryParams).toArray();
     return retVal;
@@ -79,7 +79,7 @@ StoresRouter.get("/stores/:store_id", async(req, res) => {
     try {
         //const post = await fs.readFile(`storage/${store_id}.json`);
         const queryParams = {
-            id: Number(store_id)
+            id: store_id
         };
         let retVal = await storeCollection.find(queryParams).toArray();
         console.log(retVal)
@@ -96,8 +96,7 @@ StoresRouter.get("/stores/:store_id", async(req, res) => {
 // creates a new json
 StoresRouter.post("/stores", async(req, res) => {
     const requestBody = req.body;
-    requestBody.id = nextId;
-    nextId += 1;
+    requestBody.id = uuidv4();
     createStoreDoc(requestBody);
     //await fs.writeFile(`storage/${requestBody.id}.json`, JSON.stringify(requestBody));
     res.status(201);

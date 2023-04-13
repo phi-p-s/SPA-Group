@@ -12,20 +12,19 @@ let storeCollection = db.collection('stores');
 let itemCollection = db.collection('items');
 
 const ItemsRouter = Router();
-let nextId = 0;
 export default ItemsRouter;
 
 
 async function findItemById(id) {
     //Need to update with params
-    const queryParams = { _id: Number(id) };
+    const queryParams = { _id: id };
     const retVal = await itemCollection.findOne(queryParams);
     console.log(retVal);
 }
 
 async function findItemByStore(id) {
     //Need to update with params
-    const queryParams = { store_id: Number(id) };
+    const queryParams = { store_id: id };
     const retVal = await itemCollection.find(queryParams).toArray();
     console.log(retVal);
 }
@@ -77,8 +76,7 @@ ItemsRouter.post("/", async(req, res) => {
     console.log("Ayo")
     const requestBody = req.body;
     console.log(requestBody);
-    requestBody.id = nextId;
-    nextId += 1;
+    requestBody.id = uuidv4();
 
     createItemDoc(requestBody);
     //await fs.writeFile(`storage/${requestBody.id}.json`, JSON.stringify(requestBody));
