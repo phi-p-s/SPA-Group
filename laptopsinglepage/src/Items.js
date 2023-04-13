@@ -14,7 +14,7 @@ export default function Items() {
       <a href={'/stores/' + store_id +'/items/new'}>Create new item</a>
       {items.map((item) => (
         <div key={item.id}>
-          <Link to={`${item.id}`}><p>{item.name}</p></Link>
+          <Link to={`items/${item.id}`}><p>{item.name}</p></Link>
         </div>
       ))}
     </>
