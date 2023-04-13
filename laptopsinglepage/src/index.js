@@ -36,7 +36,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/stores/:store_id",
+        path: "/stores/:store_id/items",
         loader: getItems,
         element: (
             <Items />
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
       },
       
         {
-          path: "/stores/:store_id/new",
+          path: "/stores/:store_id/items/new",
           loader: getStore,
           element: (
               <NewItem />

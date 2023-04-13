@@ -21,7 +21,7 @@ export default function Singlestore() {
   return (
     <div key={store.id} id="singlestore">
           <h1>Store name: {store.name}</h1>
-          <a href={'/stores/' + store.id +'/new'}>Create new item</a>
+          <a href={'/stores/' + store.id +'/items/new'}>Create new item</a>
           <p>store id: {store.id}</p>
     </div>
   );
