@@ -17,16 +17,19 @@ export default ItemsRouter;
 
 async function findItemById(id) {
     //Need to update with params
+    console.log(id);
     const queryParams = { _id: id };
     const retVal = await itemCollection.findOne(queryParams);
-    console.log(retVal);
+    return retVal;
 }
 
 async function findItemByStore(id) {
     //Need to update with params
+    console.log("HERE");
     const queryParams = { store_id: id };
     const retVal = await itemCollection.find(queryParams).toArray();
     console.log(retVal);
+    return retVal;
 }
 
 async function createItemDoc(jsonIn) {
