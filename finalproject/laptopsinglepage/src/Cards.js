@@ -10,10 +10,6 @@ export default function Cards() {
   var deck_id = grabValue.deck_id;
   var deck_name = grabValue.deck_name;
   let totalQuantity = 0
-  for(var i = 0; i < cards.length; i++){
-    totalQuantity += parseInt(cards[i].quantity);
-    console.log(totalQuantity)
-  }
   return (
     <>
       <h1>{deck_name}</h1>
