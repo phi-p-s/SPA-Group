@@ -98,6 +98,7 @@ CardsRouter.post("/", async(req, res) => {
 })
 //delete card
 CardsRouter.delete("/:card_id", async(req, res) => {
+    console.log("card delete firing")
     const card_id = req.params.card_id;
     cardCollection.deleteOne( {id: card_id} )
     res.status(201);
