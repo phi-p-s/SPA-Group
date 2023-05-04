@@ -79,7 +79,6 @@ DecksRouter.get("/decks", async(req, res) => {
 DecksRouter.get("/decks/:deck_id", async(req, res) => {
     const deck_id = req.params.deck_id;
     console.log(deck_id);
-    console.log("hiiiii")
     try {
         //const post = await fs.readFile(`storage/${deck_id}.json`);
         const queryParams = {

@@ -19,27 +19,33 @@ export default function NewCard() {
         event.preventDefault();
         
         const cardName = inputName.toLowerCase();
+        const displayName = inputName.charAt(0).toUpperCase() + inputName.slice(1);
+        let cardType = null;
+        let img_uri = null;
         fetch(`https://api.scryfall.com/cards/named?fuzzy=${cardName}`)
         .then((body) => body.json())
         .then((json) => {
-          console.log(json);
-          
+            console.log(json);
+            cardType = json.set_type;
+            img_uri = json.image_uris.small;
+            console.log(cardType);
+            console.log(img_uri)
+            if (cardType != "token"){
+                const newCardObject = {
+                    name: displayName,
+                    quantity: inputQuantity,
+                    deck_id: deck.id,
+                    image_uri: img_uri,
+                    card_type: cardType
+                };
+                console.log(newCardObject);
+                fetch(`http://localhost:3001/decks/${deck.id}/cards`, {
+                    method: 'POST',
+                    headers: {'Content-type': 'application/json'},
+                    body: JSON.stringify(newCardObject)
+                });
+            }
         });
-
-        const newCardObject = {
-            name: inputName,
-            quantity: inputQuantity,
-            price: inputPrice,
-            deck_id: deck.id
-        };
-        console.log(newCardObject);
-    
-        await fetch(`http://localhost:3001/decks/${deck.id}/cards`, {
-            method: 'POST',
-            headers: {'Content-type': 'application/json'},
-            body: JSON.stringify(newCardObject)
-        });
-        console.log("poo");
     }
 
   return (
@@ -55,9 +61,6 @@ export default function NewCard() {
                 <input type="text" value={inputQuantity} onChange = {(event) =>  setQuantity(event.target.value)}/> 
                 {/* <button type= "submit">Update Quantity</button> */}
                 <br></br>
-                <p>Price</p>
-                <input type="text" value={inputPrice} onChange = {(event) =>  setPrice(event.target.value)}/> 
-                {/* <button type= "submit">Update Price</button> */}
         </form>
     </div>
     

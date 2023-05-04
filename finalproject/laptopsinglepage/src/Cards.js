@@ -7,17 +7,20 @@ export default function Cards() {
   console.log(grabValue)
   var cards = [];
   cards = grabValue.retVal;
-  console.log('where card')
-  console.log(cards)
   var deck_id = grabValue.deck_id;
   var deck_name = grabValue.deck_name;
+  console.log("ayo")
+  console.log(cards)
   return (
     <>
       <h1>{deck_name}</h1>
       <a href={'/decks/' + deck_id +'/cards/new'}>Create new card</a>
       {cards.map((card) => (
         <div key={card.id}>
-          <Link to={`cards/${card.id}`}><p>Quantity: {card.quantity} {card.name}</p></Link>
+          <h1>{card.name}</h1>
+          <p>Quantity: {card.quantity} </p>
+          <img src ={card.image_uri} />
+          <button>Delete</button>
         </div>
       ))}
     </>

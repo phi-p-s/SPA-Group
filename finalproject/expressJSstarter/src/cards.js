@@ -25,7 +25,6 @@ async function findCardById(id) {
 
 async function findCardByDeck(id) {
     //Need to update with params
-    console.log("HERE");
     const queryParams = { deck_id: id };
     const retVal = await cardCollection.find(queryParams).toArray();
     console.log(retVal);
@@ -57,7 +56,6 @@ CardsRouter.get("/", async(req, res) => {
     //  const contents = await fs.readFile(`storage/${entry}`);
     //  allCards.cards.push(JSON.parse(contents));
     //}
-    console.log("waddup")
     const queryParams = { deck_id: req.params.deck_id };
     console.log(queryParams)
     let retVal = await cardCollection.find(queryParams).toArray();
