@@ -52,7 +52,8 @@ export default function NewCard() {
             //No tokens
             //Cannot add more than 4 of any card
             //No limit on basic lands
-            if (cardType[0].toLowerCase() != "token"){
+            console.log(inputQuantity)
+            if (cardType[0].toLowerCase() != "token" && inputQuantity != ''){
                 let displayQuantity = inputQuantity;
                 if (cardType[0].toLowerCase() != "basic" && inputQuantity > 4){
                     console.log("waddup")
