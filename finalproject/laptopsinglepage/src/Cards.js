@@ -9,13 +9,16 @@ export default function Cards() {
   cards = grabValue.retVal;
   var deck_id = grabValue.deck_id;
   var deck_name = grabValue.deck_name;
-  console.log("ayo")
-  console.log(cards)
-  
+  let totalQuantity = 0
+  for(var i = 0; i < cards.length; i++){
+    totalQuantity += parseInt(cards[i].quantity);
+    console.log(totalQuantity)
+  }
   return (
     <>
       <h1>{deck_name}</h1>
       <a href={'/decks/' + deck_id +'/cards/new'}>Create new card</a>
+      <p>Deck Size: {totalQuantity}</p>
       <div className='pokecards'>
         {cards.map((card) => (
           
