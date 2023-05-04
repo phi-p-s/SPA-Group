@@ -108,7 +108,7 @@ DecksRouter.post("/decks", async(req, res) => {
 
 DecksRouter.delete("/decks/:deck_id", async(req, res) => {
     const deck_id = req.params.deck_id;
-    await fs.unlink(`storage/${deck_id}.json`);
+    deckCollection.deleteOne( {id: deck_id} )
     res.status(201);
     res.send('');
 });

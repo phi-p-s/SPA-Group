@@ -98,12 +98,7 @@ CardsRouter.post("/", async(req, res) => {
 })
 //delete card
 CardsRouter.delete("/:card_id", async(req, res) => {
-    const deck_id = req.params.deck_id;
     const card_id = req.params.card_id;
-    const queryParams = {
-        deck_id: deck_id,
-        id: card_id
-    };
     cardCollection.deleteOne( {id: card_id} )
     res.status(201);
     res.send('');

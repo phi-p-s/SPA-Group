@@ -19,7 +19,7 @@ export default function Cards() {
       <h1>{deck_name}</h1>
       <a href={'/decks/' + deck_id +'/cards/new'}>Create new card</a>
       <p>Deck Size: {totalQuantity}</p>
-      <button>Delete Deck</button>
+      <button onClick = {(event) => deleteDeck(deck_id)}>Delete Deck</button>
       <div className='magiccards'>
         {cards.map((card) => (
           <div key={card.id} className='card'>
@@ -36,13 +36,18 @@ export default function Cards() {
 }
 
 async function deleteCard(deck_id, card_id) {
-  console.log("wass good")
   fetch(`http://localhost:3001/decks/${deck_id}/cards/${card_id}`, {
             method: 'DELETE'
   });
   window.location.reload(false);
 }
 
+async function deleteDeck(deck_id) {
+  fetch(`http://localhost:3001/decks/${deck_id}`, {
+            method: 'DELETE'
+  });
+  window.location.replace('http://localhost:3000/decks')
+}
 export async function getCards({params}) {
     console.log(params.deck_id);
     const response = await fetch(`http://localhost:3001/decks/${params.deck_id}/cards`);
