@@ -13,6 +13,13 @@
   }
 }
 
+#root {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -24,9 +31,25 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.pokecards {
+  display: flex;
+  flex-direction: row;
+  /* align-items: stretch; */
+  flex-wrap: wrap;
 }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin: 5px;
+  width: 40%;
+  justify-content: center;
+  align-items: center;
+  border: rgb(92, 40, 57) 2px solid;
+  /* background-color: rgb(245, 106, 152); */
+}
+
 
 @keyframes App-logo-spin {
   from {
