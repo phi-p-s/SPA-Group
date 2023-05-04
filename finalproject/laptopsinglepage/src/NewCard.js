@@ -29,7 +29,7 @@ export default function NewCard() {
         await fetch(`http://localhost:3001/decks/${deck.id}/cards`, {
             method: 'POST',
             headers: {'Content-type': 'application/json'},
-            body: JSON.stringify(newDtoreObject)
+            body: JSON.stringify(newDeckObject)
         });
         console.log("poo");
     }

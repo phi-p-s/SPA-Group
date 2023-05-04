@@ -5,11 +5,11 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Wrapper from './Wrapper';
 import Decks, { fetchDecks } from './Decks';
-import SingleStore,{ getDeck } from './SingleDeck';
-import Items, { getCards } from './Cards';
-import NewStore, { postDeck } from './NewDeck';
-import NewItem, { postCard } from './NewCard';
-import SingleItem, {getCard} from './SingleCard';
+import SingleDeck,{ getDeck } from './SingleDeck';
+import Cards, { getCards } from './Cards';
+import NewDeck, { postDeck } from './NewDeck';
+import NewCard, { postCard } from './NewCard';
+import SingleCard, {getCard} from './SingleCard';
 // import { fetchDecks } from './decks';
 
 
@@ -25,37 +25,37 @@ const router = createBrowserRouter([
         element: <Decks />,
       },
       {
-        path: "/stores/:store_id/items",
-        loader: getStore,
+        path: "/decks/:deck_id/cards",
+        loader: getDeck,
         element: (
-            <SingleStore />
+            <SingleDeck />
         ),
       },
       {
-        path: "/stores/new",
+        path: "/decks/new",
         element: (
-            <NewStore />
+            <NewDeck />
         ),
       },
       {
-        path: "/stores/:store_id/",
-        loader: getItems,
+        path: "/decks/:deck_id/",
+        loader: getCards,
         element: (
-            <Items />
+            <Cards />
         ),
       },
       {
-        path: "/stores/:store_id/items/:item_id",
-        loader: getItem,
+        path: "/decks/:deck_id/cards/:card_id",
+        loader: getCard,
         element: (
-          <SingleItem />
+          <SingleCard />
         )
       },
       {
-          path: "/stores/:store_id/items/new",
-          loader: getStore,
+          path: "/decks/:deck_id/cards/new",
+          loader: getDeck,
           element: (
-              <NewItem />
+              <NewCard />
           ),
       },
     ],
