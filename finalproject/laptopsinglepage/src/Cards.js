@@ -11,6 +11,7 @@ export default function Cards() {
   var deck_name = grabValue.deck_name;
   console.log("ayo")
   console.log(cards)
+  
   return (
     <>
       <h1>{deck_name}</h1>
