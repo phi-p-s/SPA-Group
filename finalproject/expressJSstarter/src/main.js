@@ -106,6 +106,13 @@ DecksRouter.post("/decks", async(req, res) => {
     res.send('');
 });
 
+DecksRouter.delete("/decks/:deck_id", async(req, res) => {
+    const deck_id = req.params.deck_id;
+    await fs.unlink(`storage/${deck_id}.json`);
+    res.status(201);
+    res.send('');
+});
+
 //NOT USED
 DecksRouter.put("/decks/:deck_id", async(req, res) => {
 
@@ -115,14 +122,6 @@ DecksRouter.put("/decks/:deck_id", async(req, res) => {
 
     await fs.writeFile(`storage/${deck_id}.json`, JSON.stringify(requestBody));
 
-});
-
-//NOT USED
-DecksRouter.delete("/decks/:deck_id", async(req, res) => {
-    const deck_id = req.params.deck_id;
-    await fs.unlink(`storage/${deck_id}.json`);
-    res.status(201);
-    res.send('');
 });
 
 app.listen(port, () => {

@@ -2,9 +2,6 @@ import { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import './deck.css';
 
-
-
-
 export default function NewCard() {
 
     const [inputName, setName] = useState('');
@@ -38,9 +35,7 @@ export default function NewCard() {
     }
 
     async function createNewCardSubmission(event) {
-
         event.preventDefault();
-        
         const cardName = inputName.toLowerCase();
         const displayName = capitalize(inputName)
         let cardType = null;
