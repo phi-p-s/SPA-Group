@@ -29,12 +29,20 @@ export default function NewCard() {
         });
     }
 
+    function capitalize(string){
+        let arr = string.split(" ")
+        for(var i = 0; i < arr.length; i++){
+            arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+        }
+        return arr.join(" ")
+    }
+
     async function createNewCardSubmission(event) {
 
         event.preventDefault();
         
         const cardName = inputName.toLowerCase();
-        const displayName = inputName.charAt(0).toUpperCase() + inputName.slice(1);
+        const displayName = capitalize(inputName)
         let cardType = null;
         let img_uri = null;
         fetch(`https://api.scryfall.com/cards/named?fuzzy=${cardName}`)
