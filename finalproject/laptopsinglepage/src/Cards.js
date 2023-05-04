@@ -1,5 +1,5 @@
 import {Link, useLoaderData} from 'react-router-dom';
-
+import "./App.css"
 
 export default function Cards() {
   var grabValue = [];
@@ -15,14 +15,17 @@ export default function Cards() {
     <>
       <h1>{deck_name}</h1>
       <a href={'/decks/' + deck_id +'/cards/new'}>Create new card</a>
-      {cards.map((card) => (
-        <div key={card.id}>
-          <h1>{card.name}</h1>
-          <p>Quantity: {card.quantity} </p>
-          <img src ={card.image_uri} />
-          <button>Delete</button>
-        </div>
-      ))}
+      <div className='pokecards'>
+        {cards.map((card) => (
+          
+          <div key={card.id} className='card'>
+            <h1>{card.name}</h1>
+            <p>Quantity: {card.quantity} </p>
+            <img src ={card.image_uri} />
+            <button>Delete</button>
+          </div>
+        ))}
+      </div>
     </>
   );
 }
@@ -30,11 +33,9 @@ export default function Cards() {
 export async function getCards({params}) {
     console.log(params.deck_id);
     const response = await fetch(`http://localhost:3001/decks/${params.deck_id}/cards`);
-    console.log("error here?")
     const deck_name_response = await fetch(`http://localhost:3001/decks/${params.deck_id}`);
     let deckVal = await deck_name_response.json();
     let retVal = await response.json();
-    console.log("cards list");
     console.log(retVal)
     console.log(deckVal[0].name);
     let returnValue = 

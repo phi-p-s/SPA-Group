@@ -9,7 +9,6 @@ export default function NewDeck() {
     async function createNewDeckSubmission(event) {
         event.preventDefault();
         
-    
         const newDeckObject = {
             name: inputName,
         };
