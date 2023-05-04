@@ -3,34 +3,34 @@ import {Link, useLoaderData} from 'react-router-dom';
 import './deck.css';
 
 
-export default function NewStore() {
+export default function NewDeck() {
     const [inputName, setDescription] = useState('');
 
-    async function createNewStoreSubmission(event) {
+    async function createNewDeckSubmission(event) {
         event.preventDefault();
         
     
-        const newStoreObject = {
+        const newDeckObject = {
             name: inputName,
         };
     
-        console.log(newStoreObject);
+        console.log(newDeckObject);
 
-        await fetch(`http://localhost:3001/stores`, {
+        await fetch(`http://localhost:3001/decks`, {
             method: 'POST',
             headers: {'Content-type': 'application/json'},
-            body: JSON.stringify(newStoreObject)
+            body: JSON.stringify(newDeckObject)
         });
     
     }
 
   return (
-    <div id="createNewStore">
-        <h1>Create New Stores</h1>
-        <form onSubmit={(event) => createNewStoreSubmission(event)}>
+    <div id="createNewDeck">
+        <h1>Create New Decks</h1>
+        <form onSubmit={(event) => createNewDeckSubmission(event)}>
             <br></br>
                 <input type="text" value={inputName} onChange = {(event) => setDescription(event.target.value)}/> 
-                <button type= "submit">Update Stores</button>
+                <button type= "submit">Update Decks</button>
         </form>
     </div>
     

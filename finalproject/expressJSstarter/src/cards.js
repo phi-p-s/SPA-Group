@@ -7,8 +7,8 @@ import { MongoClient } from 'mongodb';
 let uri = 'mongodb://127.0.0.1:27017';
 let client = new MongoClient(uri);
 await client.connect();
-let db = client.db('local');
-let storeCollection = db.collection('stores');
+let db = client.db('deckbuilder_database');
+let deckCollection = db.collection('decks');
 let cardCollection = db.collection('cards');
 
 const CardsRouter = Router();
@@ -23,10 +23,10 @@ async function findCardById(id) {
     return retVal;
 }
 
-async function findCardByStore(id) {
+async function findCardByDeck(id) {
     //Need to update with params
     console.log("HERE");
-    const queryParams = { store_id: id };
+    const queryParams = { deck_id: id };
     const retVal = await cardCollection.find(queryParams).toArray();
     console.log(retVal);
     return retVal;
@@ -40,14 +40,14 @@ async function createCardDoc(jsonIn) {
     //  name: nameIn,
     //  quantity: quantityIn,
     //  price: priceIn,
-    //  store_id: store_id_in 
+    //  deck_id: deck_id_in 
     //};
     await cardCollection.insertOne(jsonIn);
 }
 
 //Get specific card
 CardsRouter.get("/", async(req, res) => {
-    //const directoryContents = await fs.readdir(`storage/${store_id}`);
+    //const directoryContents = await fs.readdir(`storage/${deck_id}`);
     //const allCards = {
     //  cards: [],
     //  count: directoryContents.length
@@ -57,7 +57,8 @@ CardsRouter.get("/", async(req, res) => {
     //  const contents = await fs.readFile(`storage/${entry}`);
     //  allCards.cards.push(JSON.parse(contents));
     //}
-    const queryParams = { store_id: req.params.store_id };
+    console.log("waddup")
+    const queryParams = { deck_id: req.params.deck_id };
     console.log(queryParams)
     let retVal = await cardCollection.find(queryParams).toArray();
     console.log(retVal)
@@ -66,13 +67,13 @@ CardsRouter.get("/", async(req, res) => {
 
 //Get specific card
 CardsRouter.get("/:card_id", async(req, res) => {
-    const store_id = req.params.store_id;
+    const deck_id = req.params.deck_id;
     const card_id = req.params.card_id;
     console.log("HI");
     try {
-        //const post = await fs.readFile(`storage/${store_id}.json`);
+        //const post = await fs.readFile(`storage/${deck_id}.json`);
         const queryParams = {
-            store_id: store_id,
+            deck_id: deck_id,
             id: card_id
         };
         let retVal = await cardCollection.find(queryParams).toArray();

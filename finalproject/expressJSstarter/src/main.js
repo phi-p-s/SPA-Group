@@ -11,20 +11,17 @@ const app = express();
 let uri = 'mongodb://127.0.0.1:27017';
 let client = new MongoClient(uri);
 await client.connect();
-let db = client.db('local');
+let db = client.db('deckbuilder_database');
 
 let deckCollection = db.collection('decks');
 let cardCollection = db.collection('cards');
 let nextId = 0;
-// const DecksRouter = Router();
 
 const DecksRouter = Router();
 
-
 CardsRouter.mergeParams = true;
-// DecksRouter.use("/decks/:deck_id/items", CardsRouter)
 
-DecksRouter.use("/decks/:decks_id/items", CardsRouter)
+DecksRouter.use("/decks/:decks_id/cards", CardsRouter)
 
 async function findDeckById(id) {
     //Need to update with params
@@ -82,6 +79,7 @@ DecksRouter.get("/decks", async(req, res) => {
 DecksRouter.get("/decks/:deck_id", async(req, res) => {
     const deck_id = req.params.deck_id;
     console.log(deck_id);
+    console.log("hiiiii")
     try {
         //const post = await fs.readFile(`storage/${deck_id}.json`);
         const queryParams = {

@@ -22,8 +22,9 @@ export default function Cards() {
 }
 
 export async function getCards({params}) {
-    console.log("get cards ran");
+    console.log(params.deck_id);
     const response = await fetch(`http://localhost:3001/decks/${params.deck_id}/cards`);
+    console.log("error here?")
     const deck_name_response = await fetch(`http://localhost:3001/decks/${params.deck_id}`);
     let deckVal = await deck_name_response.json();
     let retVal = await response.json();

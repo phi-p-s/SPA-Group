@@ -18,18 +18,18 @@ export default function NewCard() {
 
         event.preventDefault();
     
-        const newDeckObject = {
+        const newCardObject = {
             name: inputName,
             quantity: inputQuantity,
             price: inputPrice,
             deck_id: deck.id
         };
-        console.log(newDeckObject);
+        console.log(newCardObject);
     
         await fetch(`http://localhost:3001/decks/${deck.id}/cards`, {
             method: 'POST',
             headers: {'Content-type': 'application/json'},
-            body: JSON.stringify(newDeckObject)
+            body: JSON.stringify(newCardObject)
         });
         console.log("poo");
     }

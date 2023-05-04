@@ -21,7 +21,7 @@ export default function SingleDeck() {
   return (
     <div key={deck.id} id="singledeck">
           <h1>Deck name: {deck.name}</h1>
-          <a href={'/decks/' + deck.id +'/cards/new'}>Create new item</a>
+          <a href={'/decks/' + deck.id +'/cards/new'}>Create new card</a>
     </div>
   );
 }

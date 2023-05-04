@@ -9,6 +9,8 @@ export default function Wrapper() {
         <header className="App-header">
           <h1>MTG Deck Builder</h1>
           <Link to ="/decks">View decks</Link>
+          <br></br>
+          <Link to="/decks/new">Create a new deck</Link>
         </header>
         <Outlet/>
       </div>
