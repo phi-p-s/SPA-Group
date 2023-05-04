@@ -1,0 +1,41 @@
+This was what I initally typed in the project pitch
+
+App Name: WebApps Mtg deck builder
+
+I play a card game called magic the gathering and would like to make a deck builder website similar to
+that of the pokemon one but much more in detail and implements an api from a website called “ScryFall”.
+You’ll be able to create different decks in different folders and add specific cards, certain deck
+types will have rules about the way the deck has to be built. For the time being we'll follow the 
+rules that you can only have 4 of each card except for basic lands(a specific kind of card) and 
+have a minimum deck size of 60 cards. As you add cards it will fetch from the backend adding cards
+to mongodb so that you can have deck persistence. You’ll be able to look up, add or delete existing 
+cards and name the decks(hopefully). There’s obviously a lot we want to do with this application but
+as we create it we’ll probably change and adapt ideas so as to best hit each requirement.
+
+
+Frontend:
+Two web pages, one for view all decks and displays all cards in current deck with their jpgs. Second for 
+when you click on a specific card it redirects to a new page which only displays that one cards jpg, its 
+name and a text description of its attributes, like individual items in store webpage.
+
+- Display jpgs for whole deck
+- Searchbar for cards
+- Plus and a minus to add or remove an individual card
+- Current card count of deck
+- Card count on an individual card
+- When card clicked redirect to card page
+
+
+Backend:
+Hopefully have different named decks in mongodb with their individual cards in the database that have their
+png, card description/attributes, and card count.
+
+- Post, to add new cards to database(pull from ScryFall api) with their info
+- Post, to add new decks to database
+- Get, which gets all cards in current database and displays all of them
+- Get, which gets individual cards attributes
+- Delete, which deletes a deck or a card from backend
+- put, which changes card count in backend
+
+
+
