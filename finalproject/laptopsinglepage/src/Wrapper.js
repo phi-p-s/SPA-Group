@@ -2,15 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Link, Outlet } from 'react-router-dom';
 
-function App() {
-
-
-
-
-
-
-
-
+export default function Wrapper() {
   return (
     <>
       <div className="App">
@@ -23,5 +15,3 @@ function App() {
     </>
   );
 }
-
-export default App;
