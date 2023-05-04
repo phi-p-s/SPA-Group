@@ -9,73 +9,73 @@ let client = new MongoClient(uri);
 await client.connect();
 let db = client.db('local');
 let storeCollection = db.collection('stores');
-let itemCollection = db.collection('items');
+let cardCollection = db.collection('cards');
 
-const ItemsRouter = Router();
-export default ItemsRouter;
+const CardsRouter = Router();
+export default CardsRouter;
 
 
-async function findItemById(id) {
+async function findCardById(id) {
     //Need to update with params
     console.log(id);
     const queryParams = { _id: id };
-    const retVal = await itemCollection.findOne(queryParams);
+    const retVal = await cardCollection.findOne(queryParams);
     return retVal;
 }
 
-async function findItemByStore(id) {
+async function findCardByStore(id) {
     //Need to update with params
     console.log("HERE");
     const queryParams = { store_id: id };
-    const retVal = await itemCollection.find(queryParams).toArray();
+    const retVal = await cardCollection.find(queryParams).toArray();
     console.log(retVal);
     return retVal;
 }
 
-async function createItemDoc(jsonIn) {
+async function createCardDoc(jsonIn) {
 
     //Need to update with params
-    //const item = {
+    //const card = {
     //  _id: Number(id),
     //  name: nameIn,
     //  quantity: quantityIn,
     //  price: priceIn,
     //  store_id: store_id_in 
     //};
-    await itemCollection.insertOne(jsonIn);
+    await cardCollection.insertOne(jsonIn);
 }
 
-//Get specific item
-ItemsRouter.get("/", async(req, res) => {
+//Get specific card
+CardsRouter.get("/", async(req, res) => {
     //const directoryContents = await fs.readdir(`storage/${store_id}`);
-    //const allItems = {
-    //  items: [],
+    //const allCards = {
+    //  cards: [],
     //  count: directoryContents.length
     //};
     //
     //for (const entry of directoryContents) {
     //  const contents = await fs.readFile(`storage/${entry}`);
-    //  allItems.items.push(JSON.parse(contents));
+    //  allCards.cards.push(JSON.parse(contents));
     //}
     const queryParams = { store_id: req.params.store_id };
     console.log(queryParams)
-    let retVal = await itemCollection.find(queryParams).toArray();
+    let retVal = await cardCollection.find(queryParams).toArray();
     console.log(retVal)
     res.send(retVal);
 })
 
-//Get specific item
-ItemsRouter.get("/:item_id", async(req, res) => {
+//Get specific card
+CardsRouter.get("/:card_id", async(req, res) => {
     const store_id = req.params.store_id;
-    const item_id = req.params.item_id;
+    const card_id = req.params.card_id;
     console.log("HI");
     try {
         //const post = await fs.readFile(`storage/${store_id}.json`);
         const queryParams = {
             store_id: store_id,
-            id: item_id
+            id: card_id
         };
-        let retVal = await itemCollection.find(queryParams).toArray();
+        let retVal = await cardCollection.find(queryParams).toArray();
         console.log(retVal)
         res.json(retVal);
     } catch (e) {
@@ -85,14 +85,14 @@ ItemsRouter.get("/:item_id", async(req, res) => {
     }
 })
 
-//Create item
-ItemsRouter.post("/", async(req, res) => {
+//Create card
+CardsRouter.post("/", async(req, res) => {
     console.log("Ayo")
     const requestBody = req.body;
     console.log(requestBody);
     requestBody.id = uuidv4();
 
-    createItemDoc(requestBody);
+    createCardDoc(requestBody);
     //await fs.writeFile(`storage/${requestBody.id}.json`, JSON.stringify(requestBody));
     res.status(201);
     res.send('');

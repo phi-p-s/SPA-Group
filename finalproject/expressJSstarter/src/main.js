@@ -2,7 +2,7 @@ import express, { json, Router } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import * as fs from 'node:fs/promises';
 import cors from 'cors';
-import ItemsRouter from "./items.js";
+import CardsRouter from "./cards.js";
 import { MongoClient } from 'mongodb';
 
 const port = 3001;
@@ -16,78 +16,78 @@ let db = client.db('local');
 let deckCollection = db.collection('decks');
 let cardCollection = db.collection('cards');
 let nextId = 0;
-// const StoresRouter = Router();
+// const DecksRouter = Router();
 
 const DecksRouter = Router();
 
 
 CardsRouter.mergeParams = true;
-// DecksRouter.use("/stores/:store_id/items", CardsRouter)
+// DecksRouter.use("/decks/:deck_id/items", CardsRouter)
 
 DecksRouter.use("/decks/:decks_id/items", CardsRouter)
 
-async function findStoreById(id) {
+async function findDeckById(id) {
     //Need to update with params
     const queryParams = {
         _id: id
     };
-    let retVal = await storeCollection.find(queryParams).toArray();
+    let retVal = await deckCollection.find(queryParams).toArray();
     return retVal;
 }
 
-async function findAllStores() {
+async function findAllDecks() {
     const queryParams = {};
-    let retVal = await storeCollection.find(queryParams).toArray();
+    let retVal = await deckCollection.find(queryParams).toArray();
     return retVal;
 }
 
 
-async function createStoreDoc(jsonIn) {
+async function createDeckDoc(jsonIn) {
 
     //Need to update with params
-    //const store = {
+    //const deck = {
     //  _id: Number(id),
     //  name: nameIn
     //};
-    await storeCollection.insertOne(jsonIn);
+    await deckCollection.insertOne(jsonIn);
 }
 
 
 
 //ItemsRouter.mergeParams = true;
-//StoresRouter.use("/:store_id/items", ItemsRouter);
+//DecksRouter.use("/:deck_id/items", ItemsRouter);
 
 // Use the JSON parsing middleware so we can access it via `req.body`
 app.use(express.json());
 app.use(cors());
-app.use(StoresRouter);
+app.use(DecksRouter);
 
 
 DecksRouter.get("/decks", async(req, res) => {
     //const directoryContents = await fs.readdir('storage/');
-    //const allStores = {
-    //  stores: [],
+    //const allDecks = {
+    //  decks: [],
     //  count: directoryContents.length
     //};
 
     //for (const entry of directoryContents) {
     //  const contents = await fs.readFile(`storage/${entry}`);
-    //  allStores.stores.push(JSON.parse(contents));
+    //  allDecks.decks.push(JSON.parse(contents));
     //}
     const queryParams = {};
     let retVal = await deckCollection.find(queryParams).toArray();
     res.send(retVal);
 });
 
-StoresRouter.get("/stores/:store_id", async(req, res) => {
-    const store_id = req.params.store_id;
-    console.log(store_id);
+DecksRouter.get("/decks/:deck_id", async(req, res) => {
+    const deck_id = req.params.deck_id;
+    console.log(deck_id);
     try {
-        //const post = await fs.readFile(`storage/${store_id}.json`);
+        //const post = await fs.readFile(`storage/${deck_id}.json`);
         const queryParams = {
-            id: store_id
+            id: deck_id
         };
-        let retVal = await storeCollection.find(queryParams).toArray();
+        let retVal = await deckCollection.find(queryParams).toArray();
         console.log(retVal)
         res.json(retVal);
     } catch (e) {
@@ -100,30 +100,30 @@ StoresRouter.get("/stores/:store_id", async(req, res) => {
 
 
 // creates a new json
-StoresRouter.post("/stores", async(req, res) => {
+DecksRouter.post("/decks", async(req, res) => {
     const requestBody = req.body;
     requestBody.id = uuidv4();
-    createStoreDoc(requestBody);
+    createDeckDoc(requestBody);
     //await fs.writeFile(`storage/${requestBody.id}.json`, JSON.stringify(requestBody));
     res.status(201);
     res.send('');
 });
 
 //NOT USED
-StoresRouter.put("/stores/:store_id", async(req, res) => {
+DecksRouter.put("/decks/:deck_id", async(req, res) => {
 
-    const store_id = req.params.store_id;
+    const deck_id = req.params.deck_id;
     const requestBody = req.body;
-    requestBody.id = store_id;
+    requestBody.id = deck_id;
 
-    await fs.writeFile(`storage/${store_id}.json`, JSON.stringify(requestBody));
+    await fs.writeFile(`storage/${deck_id}.json`, JSON.stringify(requestBody));
 
 });
 
 //NOT USED
-StoresRouter.delete("/stores/:store_id", async(req, res) => {
-    const store_id = req.params.store_id;
-    await fs.unlink(`storage/${store_id}.json`);
+DecksRouter.delete("/decks/:deck_id", async(req, res) => {
+    const deck_id = req.params.deck_id;
+    await fs.unlink(`storage/${deck_id}.json`);
     res.status(201);
     res.send('');
 });
