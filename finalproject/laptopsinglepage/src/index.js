@@ -4,12 +4,12 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Wrapper from './Wrapper';
-import Decks, { fetchDecks } from './decks';
-import SingleStore,{ getStore } from './SingleStore';
-import Items, { getItems } from './Items';
-import NewStore, { postStore } from './NewStore';
-import NewItem, { postItem } from './NewItem';
-import SingleItem, {getItem} from './SingleItem';
+import Decks, { fetchDecks } from './Decks';
+import SingleStore,{ getDeck } from './SingleDeck';
+import Items, { getCards } from './Cards';
+import NewStore, { postDeck } from './NewDeck';
+import NewItem, { postCard } from './NewCard';
+import SingleItem, {getCard} from './SingleCard';
 // import { fetchDecks } from './decks';
 
 

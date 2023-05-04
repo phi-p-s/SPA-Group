@@ -6,9 +6,9 @@ export default function Decks() {
   decks = useLoaderData();
   return (
     <>
-      {decks.map((store) => (
-        <div key={store.id}>
-          <Link to={`${store.id}`}><h1>{store.name}</h1></Link>
+      {decks.map((deck) => (
+        <div key={deck.id}>
+          <Link to={`${deck.id}`}><h1>{deck.name}</h1></Link>
         </div>
       ))}
     </>

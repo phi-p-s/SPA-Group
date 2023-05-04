@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {Link, useLoaderData} from 'react-router-dom';
-import './store.css';
+import './deck.css';
 
 
 export default function NewStore() {

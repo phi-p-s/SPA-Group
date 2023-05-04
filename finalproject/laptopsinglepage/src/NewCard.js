@@ -1,47 +1,47 @@
 import { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import './store.css';
+import './deck.css';
 
 
 
 
-export default function NewItem() {
+export default function NewCard() {
 
     const [inputName, setName] = useState('');
     const [inputQuantity, setQuantity] = useState('');
     const [inputPrice, setPrice] = useState('');
 
-    const store = useLoaderData();
+    const deck = useLoaderData();
 
 
-    async function createNewItemSubmission(event) {
+    async function createNewCardSubmission(event) {
 
         event.preventDefault();
     
-        const newStoreObject = {
+        const newDeckObject = {
             name: inputName,
             quantity: inputQuantity,
             price: inputPrice,
-            store_id: store.id
+            deck_id: deck.id
         };
-        console.log(newStoreObject);
+        console.log(newDeckObject);
     
-        await fetch(`http://localhost:3001/stores/${store.id}/items`, {
+        await fetch(`http://localhost:3001/decks/${deck.id}/cards`, {
             method: 'POST',
             headers: {'Content-type': 'application/json'},
-            body: JSON.stringify(newStoreObject)
+            body: JSON.stringify(newDtoreObject)
         });
         console.log("poo");
     }
 
   return (
-    <div id="createNewStore">
-        <h1>Create New Item</h1>
-        <form onSubmit={(event) => createNewItemSubmission(event)}>
+    <div id="createNewDeck">
+        <h1>Create New card</h1>
+        <form onSubmit={(event) => createNewCardSubmission(event)}>
             <br></br>
-            <p>Item Name</p>
+            <p>Card Name</p>
                 <input type="text" value={inputName} onChange = {(event) => setName(event.target.value)}/> 
-                <button type= "submit">Update Item</button>
+                <button type= "submit">Update Card</button>
                 <br></br>
                 <p>Quantity</p>
                 <input type="text" value={inputQuantity} onChange = {(event) =>  setQuantity(event.target.value)}/> 
