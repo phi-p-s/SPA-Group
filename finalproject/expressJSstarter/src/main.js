@@ -12,13 +12,19 @@ let uri = 'mongodb://127.0.0.1:27017';
 let client = new MongoClient(uri);
 await client.connect();
 let db = client.db('local');
-let storeCollection = db.collection('stores');
-let itemCollection = db.collection('items');
-let nextId = 0;
-const StoresRouter = Router();
 
-ItemsRouter.mergeParams = true;
-StoresRouter.use("/stores/:store_id/items", ItemsRouter)
+let deckCollection = db.collection('decks');
+let cardCollection = db.collection('cards');
+let nextId = 0;
+// const StoresRouter = Router();
+
+const DecksRouter = Router();
+
+
+CardsRouter.mergeParams = true;
+// DecksRouter.use("/stores/:store_id/items", CardsRouter)
+
+DecksRouter.use("/decks/:decks_id/items", CardsRouter)
 
 async function findStoreById(id) {
     //Need to update with params
@@ -57,7 +63,7 @@ app.use(cors());
 app.use(StoresRouter);
 
 
-StoresRouter.get("/stores", async(req, res) => {
+DecksRouter.get("/decks", async(req, res) => {
     //const directoryContents = await fs.readdir('storage/');
     //const allStores = {
     //  stores: [],
@@ -69,7 +75,7 @@ StoresRouter.get("/stores", async(req, res) => {
     //  allStores.stores.push(JSON.parse(contents));
     //}
     const queryParams = {};
-    let retVal = await storeCollection.find(queryParams).toArray();
+    let retVal = await deckCollection.find(queryParams).toArray();
     res.send(retVal);
 });
 
