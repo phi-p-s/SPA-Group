@@ -17,7 +17,15 @@ export default function NewCard() {
     async function createNewCardSubmission(event) {
 
         event.preventDefault();
-    
+        
+        const cardName = inputName.toLowerCase();
+        fetch(`https://api.scryfall.com/cards/named?fuzzy=${cardName}`)
+        .then((body) => body.json())
+        .then((json) => {
+          console.log(json);
+          
+        });
+
         const newCardObject = {
             name: inputName,
             quantity: inputQuantity,
