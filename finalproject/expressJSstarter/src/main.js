@@ -21,7 +21,7 @@ const DecksRouter = Router();
 
 CardsRouter.mergeParams = true;
 
-DecksRouter.use("/decks/:decks_id/cards", CardsRouter)
+DecksRouter.use("/decks/:deck_id/cards", CardsRouter)
 
 async function findDeckById(id) {
     //Need to update with params
