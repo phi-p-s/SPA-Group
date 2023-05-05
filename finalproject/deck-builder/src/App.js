@@ -18,6 +18,7 @@ function App() {
           <h1>MTG Deck Builder</h1>
           <Link to ="/decks">View decks</Link>
         </header>
+        <hr />
         <Outlet/>
       </div>
     </>

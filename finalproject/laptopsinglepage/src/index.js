@@ -4,7 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Wrapper from './Wrapper';
-import Decks, { fetchDecks } from './Decks';
+import Decks, { fetchDecks } from './decks';
 import SingleDeck,{ getDeck } from './SingleDeck';
 import Cards, { getCards } from './Cards';
 import NewDeck, { postDeck } from './NewDeck';

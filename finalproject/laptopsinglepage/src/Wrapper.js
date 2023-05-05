@@ -14,6 +14,7 @@ export default function Wrapper() {
           <br></br>
           <Link to="/decks/new">Create a new deck</Link>
         </header>
+        <hr />
         <Outlet/>
       </div>
     </>
